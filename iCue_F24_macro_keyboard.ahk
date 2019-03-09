@@ -18,6 +18,8 @@ SendMode Input
 ;;The lines above are optional. Delete them if you need to.
 
 #include C:\AHK\2nd-keyboard\Corsair\PremiereHotTextFix.ahk
+;;I will not host this on my GitHub because it is NOT my script, nor did I report this issue.
+;;You can find the script here: https://github.com/TaranVH/2nd-keyboard/blob/master/Taran's_Premiere_Mods/PREMIERE_BUG_FIX_for_stubborn_hot_text.ahk
 #include C:\AHK\2nd-keyboard\Corsair\Window_Select.ahk
 #include C:\AHK\2nd-keyboard\Corsair\PremiereMacros.ahk
 
