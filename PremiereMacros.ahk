@@ -83,7 +83,7 @@ return
 }
 
 
-SelectPanel(Panel);;This is NOT assigned to a key but I've written it out as its own function because it is used enough time repeatedly it saves script space
+SelectPanel(Panel) ;;This is NOT assigned to a key but I've written it out as its own function because it is used enough time repeatedly it saves script space
 {	
 	PremierePanel = %Panel%
 	if PremierePanel = Timeline
@@ -108,7 +108,7 @@ return
 
 
 
-SearchFX(FX);;Again NOT assigned to any key but is written as its own function to save script space and IN CASE I want to use it for new functions in future
+SearchFX(FX) ;;Again NOT assigned to any key but is written as its own function to save script space and IN CASE I want to use it for new functions in future
 {
 	Searched = %FX%
 	BlockInput, sendandmouse
