@@ -8,28 +8,29 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 #WinActivateForce ;https://autohotkey.com/docs/commands/_WinActivateForce.htm
 
 #IfWinActive ahk_exe Adobe Premiere Pro.exe
-;;Functions below will onnly run if premiere is othe active window
+;;Functions below will only run if premiere is the active window
 ;;You should leave this be as running these command in other programs can cause failures and you may need to force the script to close
 
 ;;Some scripts and function names were borrowed from Taran Hemert such as Monomaker and InstantVFX
 ;;While my background is automation testing, I only edit as a hobby so Taran's scripts were too complex for my liking so my scripts are written for the average newbie editor and as "out of the box" as possible
 ;;(If I wanted to test Premiere Taran's scripts are MARVELOUS(with exception with very little or no indenting) but this is for hobby use not professional)
 ;;Be sure to check YOUR preferences in premiere and use the built in window spy for any pixel colours, mouse positions, and shortcuts. Many of MY preferences are still the same as the default but you should still confirm your settings so these scripts work as intented.
-
+;;(Alternatively you could download my preferences settings I've added to this very repository ^_^ "Out of the box" is the goal here)
 
 ;;In my scripts I chose to end Modifier keys in wrapped & written form.
 ;;I could make the excuse that it's easier to read for a newcomer to AutoHotKey, the real reason is that; in my experience; premiere didn't play nicely with them and sometimes would even run shortcuts GROSSLY different then what I coded.
+::(for example I created a function that used the select panel function, and then simply clicked the position box, and for some reason the shortcut to render was input instead. Very frustrating)
 
 ;;Maybe this is a local machine issue but if you see numerous "Sleep" commands and want to call this script too cautious, that's not an unfair assumption I wish I didn't need them. But in this instance where I have placed them is because the script flat out failed or did unwanted steps if I didn't set them
-;;I set local variables to match global variables as this caused much less compatibility problems between the Keuboard script and the functions script
+;;I set local variables to match global variables as this caused much less compatibility problems between the Keyboard script and the functions script
 
 ;;From this point forward I will only comment on functions and steps that are not related to every step and function. There are unique things you will need to change but again this should be an "out of the box" solution and you should only need to change minor things like mouse positions and colours, all of which are labeled and should be easy for you to use window spy and easily identify
 ;;Also note I have assigned macros to some functions set as shortcuts in premiere.  I know some would say this is blasphemous but I have small hands and a family history of arthritis and already suffer from carpal tunnel. So most keys are out of my reach as it is and hitting long shortcut keys is painful. so reaching for a macro is quicker and painless. YOU do not need to do this, but I DO.
 ;;Please do not try and use these functions with AutoIT, it is UNBELIEVABLY rigid, undocumented, and just not as fluid and simple as AutoHotKey
-;;Best of luck
+;;Best of luck and have fun.
 
 ;;=========================;;
-;;   Function Begin HERE   ;;
+;;   Functions Begin HERE  ;;
 ;;=========================;;
 
 ReverseClip()
@@ -54,6 +55,7 @@ AddFrameHold()
 		Sleep 20
 return
 }
+
 MonoMaker(Mono)
 {
 	Channel = %Mono%
@@ -83,7 +85,7 @@ return
 }
 
 
-SelectPanel(Panel) ;;This is NOT assigned to a key but I've written it out as its own function because it is used enough time repeatedly it saves script space
+SelectPanel(Panel) ;;This is NOT assigned to a key but I've written it out as its own function because it is used enough times repeatedly it saves script space
 {	
 	PremierePanel = %Panel%
 	if PremierePanel = Timeline
@@ -183,7 +185,7 @@ TwirlUntwirl()
 	return
 }
 
-ReverseTwirlUntwirl()
+ReverseTwirlUntwirl() ;;Does what TwirlUntwirl() does, just in reverse
 {
 	MouseGetPos, TwirlBegX, TwirlBegY
 	MouseMove, 328, 160
@@ -200,7 +202,7 @@ ReverseTwirlUntwirl()
 		ToolTip, Motion is Twirled
 		SetTimer, RemoveToolTip2, -400
 		return
-
+		
 		RemoveToolTip2:
 		ToolTip
 		return
@@ -294,7 +296,7 @@ InstantVFX(foobar)
 }
 
 
-CropVFX(CropBar)
+CropVFX(CropBar) ;;May require changes down the line as this function assumes the effect "Crop" is the only effect I have added to a clip. Normally while I am editing this IS the case I normally crop what I need before anything else, but this is not a futureproofed function.
 {
 	BlockInput, MouseMove
 	BlockInput, sendandmouse
@@ -366,7 +368,7 @@ CropVFX(CropBar)
 	return
 }
 
-ClickPosition()
+ClickPosition() ;;For times when I just want full control in the preview window over the position of a clip.
 {
 	SelectPanel("EffectsControl")
 	MouseGetPos, XX,YY
@@ -379,7 +381,7 @@ ClickPosition()
 return
 }
 
-ClickCropPosition()
+ClickCropPosition() ;;More times than not I end up adjusting the crop manually in the preview window.
 {
 	SelectPanel("EffectsControl")
 	MouseGetPos, XX,YY
