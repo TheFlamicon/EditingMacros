@@ -19,7 +19,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 
 ;;In my scripts I chose to end Modifier keys in wrapped & written form.
 ;;I could make the excuse that it's easier to read for a newcomer to AutoHotKey, the real reason is that; in my experience; premiere didn't play nicely with them and sometimes would even run shortcuts GROSSLY different then what I coded.
-::(for example I created a function that used the select panel function, and then simply clicked the position box, and for some reason the shortcut to render was input instead. Very frustrating)
+;;(for example I created a function that used the select panel function, and then simply clicked the position box, and for some reason the shortcut to render was input instead. Very frustrating)
 
 ;;Maybe this is a local machine issue but if you see numerous "Sleep" commands and want to call this script too cautious, that's not an unfair assumption I wish I didn't need them. But in this instance where I have placed them is because the script flat out failed or did unwanted steps if I didn't set them
 ;;I set local variables to match global variables as this caused much less compatibility problems between the Keyboard script and the functions script
@@ -30,7 +30,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 ;;Best of luck and have fun.
 
 ;;=========================;;
-;;   Functions Begin HERE  ;;
+;;   Function Begin HERE   ;;
 ;;=========================;;
 
 ReverseClip()
@@ -55,7 +55,6 @@ AddFrameHold()
 		Sleep 20
 return
 }
-
 MonoMaker(Mono)
 {
 	Channel = %Mono%
@@ -85,7 +84,7 @@ return
 }
 
 
-SelectPanel(Panel) ;;This is NOT assigned to a key but I've written it out as its own function because it is used enough times repeatedly it saves script space
+SelectPanel(Panel) ;;This is NOT assigned to a key but I've written it out as its own function because it is used enough time repeatedly it saves script space
 {	
 	PremierePanel = %Panel%
 	if PremierePanel = Timeline
@@ -185,7 +184,7 @@ TwirlUntwirl()
 	return
 }
 
-ReverseTwirlUntwirl() ;;Does what TwirlUntwirl() does, just in reverse
+ReverseTwirlUntwirl()
 {
 	MouseGetPos, TwirlBegX, TwirlBegY
 	MouseMove, 328, 160
@@ -202,7 +201,7 @@ ReverseTwirlUntwirl() ;;Does what TwirlUntwirl() does, just in reverse
 		ToolTip, Motion is Twirled
 		SetTimer, RemoveToolTip2, -400
 		return
-		
+
 		RemoveToolTip2:
 		ToolTip
 		return
@@ -264,6 +263,58 @@ InstantVFX(foobar)
 	
 	Click Down Left
 	
+	GetKeyState, VFXSinglePress, %VFXKey%, P
+	if VFXSinglePress = U
+	{
+		Click Up Left
+			Sleep 20
+			
+		if HotText = PositionH
+		{
+			MouseMove, 722, 176
+				Sleep 20
+			MouseClick Left
+		}
+
+		else if HotText = PositionV
+		{
+			MouseMove, 722, 176
+				Sleep 20
+			MouseClick Left
+		}		
+		
+		else if HotText = Scale
+		{
+			MouseMove, 722, 196
+				Sleep 20
+			MouseClick Left
+		}
+
+		else if HotText = Rotation
+		{
+			MouseMove, 722, 260
+				Sleep 20
+			MouseClick Left
+		}
+
+		else if HotText = APHor  
+		{
+			MouseMove, 722, 280
+				Sleep 20
+			MouseClick Left
+		}
+		
+		else if HotText = APVer
+		{
+			MouseMove, 722, 280
+				Sleep 20
+			MouseClick Left
+		}		
+		
+		goto EndOfInstantVFX
+	}
+	
+	
 	GetKeyState, VFXPressed, %VFXKey%, P
 
 	if VFXPressed = U
@@ -292,11 +343,13 @@ InstantVFX(foobar)
 	SelectPanel("Timeline")
 		Sleep 20
 	MouseMove, StartX, StartY
+	BlockInput, Off
+	BlockInput, MouseMoveOff
 	return
 }
 
 
-CropVFX(CropBar) ;;May require changes down the line as this function assumes the effect "Crop" is the only effect I have added to a clip. Normally while I am editing this IS the case I normally crop what I need before anything else, but this is not a futureproofed function.
+CropVFX(CropBar)
 {
 	BlockInput, MouseMove
 	BlockInput, sendandmouse
@@ -368,7 +421,7 @@ CropVFX(CropBar) ;;May require changes down the line as this function assumes th
 	return
 }
 
-ClickPosition() ;;For times when I just want full control in the preview window over the position of a clip.
+ClickPosition()
 {
 	SelectPanel("EffectsControl")
 	MouseGetPos, XX,YY
@@ -381,7 +434,7 @@ ClickPosition() ;;For times when I just want full control in the preview window 
 return
 }
 
-ClickCropPosition() ;;More times than not I end up adjusting the crop manually in the preview window.
+ClickCropPosition()
 {
 	SelectPanel("EffectsControl")
 	MouseGetPos, XX,YY
